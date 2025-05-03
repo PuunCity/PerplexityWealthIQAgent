@@ -3,13 +3,13 @@ from openai import OpenAI
 import matplotlib.pyplot as plt
 import EmailHandling.EmailSend as ESend
 import Caching.UserCache as cache
+import ApiKey
 
-# Replace with your actual Perplexity API key
-YOUR_API_KEY = "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"
+ApiKey.API_KEY
 
 # Initialize the client with Perplexity's base URL
 client = OpenAI(
-    api_key="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",
+    api_key=ApiKey.API_KEY,
     base_url="https://api.perplexity.ai",
 )
 
