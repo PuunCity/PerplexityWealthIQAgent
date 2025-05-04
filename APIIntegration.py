@@ -16,7 +16,8 @@ client = OpenAI(
 
 
 import ConsoleManagement.ConsoleInput as CI 
-defaultUserPrompt = CI.introduce()
+CI.Introduce(ESend.caching_email)
+defaultUserPrompt = CI.Query()
 
 def initialAssetHandlingAgent():
     #This is the default agent filtering what assets does the user want to know about

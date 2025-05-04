@@ -1,6 +1,11 @@
 import time as t
 
-def introduce():
+def Introduce(user):
+    usrSplit = user.split("@")[0]
+    print(usrSplit)
+
+
+def Query():
     print("Hello user! This is WealthIQ, your AI-powered investing-related news reporter. \n")
     t.sleep(2)
     try:

@@ -36,7 +36,7 @@ def emailSetupAndSend():
             img = MIMEImage(f.read(), "png")
             msg.attach(img)
             
-    # Attach HTML version
+    # Attach HTML
     msg.attach(MIMEText(html_content, 'html'))
     
     # Connect to SMTP server and send email
