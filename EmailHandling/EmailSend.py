@@ -14,7 +14,7 @@ caching_email = receiver_email
 def emailSetupAndSend():
     # Set up email details
     sender_email = "wealthiqbot@gmail.com"
-    subject = "This is your insight! - Bryan Minciuna"
+    subject = "This is your insight! - WealthIQ Team"
     
     with open("Output.md", "r") as f:
         body = f.read()
@@ -44,6 +44,7 @@ def emailSetupAndSend():
         server.starttls()  # Secure the connection
         server.login(sender_email, 'qkusczydwmuzzjmi')
         server.send_message(msg)
+    print("Email sent! Until next time user!")
 
 
 

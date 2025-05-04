@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import EmailHandling.EmailSend as ESend
 import Caching.UserCache as cache
 import ApiKey
+import ConsoleManagement.ConsoleInput as CI 
 
 ApiKey.API_KEY
 
@@ -13,10 +14,11 @@ client = OpenAI(
     base_url="https://api.perplexity.ai",
 )
 
+print(f"Hello {ESend.caching_email.split("@")[0]}! Welcome to WealthIQ, how can assist you today? Type help for a list of commands.")
 
 
-import ConsoleManagement.ConsoleInput as CI 
 CI.Introduce(ESend.caching_email)
+
 defaultUserPrompt = CI.Query()
 
 def initialAssetHandlingAgent():
@@ -59,6 +61,8 @@ if answerAssetsCorrect == "y":
     for asset in (assetsList):
         ESend.numberOfGraphImagesToAttach += 1
     
+print("generating graphs...")    
+
 def imageGeneraration(index):
     #This is the image generating agent handling the generation of image graph of price of asset
     image = [
@@ -73,6 +77,8 @@ def imageGeneraration(index):
             You only generate the code for the graph nothing else, what you are outputing is getting executed.
             Do not analyse anything apart just the code for the graph. I want the output to just start with the python,
             no "```python" header, just python code without any text.
+            Do not use numpy as there often issues with the generated code.
+            Do not import any other libraries than matplotlib.pyplot as you keep making mistakes.
             
             Here is a good exemple of output:
             
@@ -96,7 +102,7 @@ def imageGeneraration(index):
             Name the exported file "graph{index}.png"
 
             Double check your code, run it and verify if there is any errors, if there is one, redo it.
-            There should be no errors.
+            There should be no errors. Don't overcomplicate your code, a simple graph like shown in the template. YOU MUST FOLLOW THE TEMPLATE
             """,
         },
         {"role": "user", "content": assetsList[index]}
@@ -124,6 +130,7 @@ for image in images:
 
 print("graphs generated!")
 
+print("generating analysis...")
 
 #This is the analysis agent providing a markdown format insight of the user's asset
 messages = [
@@ -154,16 +161,14 @@ finalResponse = client.chat.completions.create(
     model="sonar-pro", messages=messages
 )
 
-print("generating analysis...")
-
-#Replace write type with "wb" but returns an error
-# with open("graph.png", "w") as image:
-#    image.write(imageAssetsResponse.choices[0].message.content)
+print("analysis generated!")
 
 print("generating output...")
 
 with open("Output.md", "w") as file:
     file.write(finalResponse.choices[0].message.content)
+
+print("output generated!")
 
 print("preparing email...")
 
