@@ -1,4 +1,5 @@
 import time as t
+import Caching.UserCache as UCache
 
 introAnswer = ""
 def Introduce(user):
@@ -18,7 +19,7 @@ def Introduce(user):
                 """)
         elif introAnswer == "fetch":
             print("fetching user data!\n")
-            break
+            print(UCache.Fetching(user))
         elif introAnswer == "query":
             print("let's get started!\n")
             break
