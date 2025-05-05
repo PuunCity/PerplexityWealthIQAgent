@@ -8,7 +8,7 @@ from email.mime.image import MIMEImage
 
 numberOfGraphImagesToAttach = 0
 
-receiver_email = input(str("What is your email? \n"))
+receiver_email = input(str("What is your email? \n")).lower()
 caching_email = receiver_email
 
 def emailSetupAndSend():

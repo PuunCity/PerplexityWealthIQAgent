@@ -201,4 +201,3 @@ cachingResponse = client.chat.completions.create(
 
 
 cache.Caching(ESend.caching_email, cachingResponse.choices[0].message.content)
-

@@ -19,7 +19,12 @@ def Introduce(user):
                 """)
         elif introAnswer == "fetch":
             print("fetching user data!\n")
-            print(UCache.Fetching(user))
+            print("User:", user)
+            try:
+                for sumary in UCache.Fetching()[user]:
+                    print(sumary)
+            except:
+                print("data not found! (You should start by querying!)")        
         elif introAnswer == "query":
             print("let's get started!\n")
             break
@@ -32,7 +37,7 @@ def Introduce(user):
 
 
 def Query():
-    print("Hello user! This is WealthIQ, your AI-powered investing-related news reporter. \n")
+    print("This is WealthIQ, your AI-powered investing-related news reporter. \n")
     t.sleep(2)
     try:
         print("To get started, please start by typing in the assets (separated by a comma) you wish to be kept updated on: \n")
