@@ -1,9 +1,10 @@
 from datetime import datetime
-import pickle
+import pickle # Module responsible for serializing and un-serializing data in binary format, used for caching purposes
+# https://docs.python.org/3/library/pickle.html
 
 localTime = datetime.now().strftime("%Y-%m-%d -- %H:%M")
 
-# Initial fetch
+# Initial fetching from the cache
 cache = {}
 with open("cache.pkl", "rb") as file:
     cache = pickle.load(file)
@@ -21,7 +22,7 @@ def Caching(user, response):
         pickle.dump(cache, file)
     
 def Fetching():
-    with open("cache.pkl", "rb") as file:
+    with open("cache.pkl", "rb") as file: # .rb is read binary mode
         if not file:
             print("No data associated to user! (Maybe try creating a query?)")
         loaded_cache = pickle.load(file)
